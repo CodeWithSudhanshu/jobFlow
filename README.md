@@ -1,513 +1,393 @@
-🚀 JobFlow — Career Command Center
-<div align="center">
-Track applications. Manage opportunities. Own your career.
+# 🚀 JobFlow
 
-A modern full-stack Job Application Management Platform built to help developers organize their job search, manage applications, track progress, and analyze resumes.
+> A modern full-stack job management platform designed to simplify the process of discovering, tracking, and managing job applications.
 
-<br>
+JobFlow is a full-stack web application built with **React** and **FastAPI**. It provides a structured way to manage job opportunities and application data while keeping authentication, backend APIs, and database operations organized in a single application.
 
+---
 
+## ✨ Features
 
+* 🔐 **User Authentication**
 
+  * Secure user registration and login
+  * JWT-based authentication
+  * Protected API routes
 
+* 💼 **Job Management**
 
-<br>
+  * Add and manage job opportunities
+  * Track job application information
+  * Organize applications in one place
 
+* 📊 **Application Tracking**
 
+  * Keep track of application progress
+  * Manage different application stages
+  * Maintain job-related information
 
+* ⚡ **Fast REST API**
 
+  * Built using FastAPI
+  * Automatic API documentation
+  * Clean backend architecture
 
+* 🗄️ **PostgreSQL Database**
 
+  * Persistent data storage
+  * PostgreSQL hosted using Neon
 
+* 🎨 **React Frontend**
 
+  * Modern component-based UI
+  * Communicates with the FastAPI backend through REST APIs
 
+* ☁️ **Deployment Ready**
 
+  * Backend configured for Render
+  * Frontend can be deployed through Vercel
 
+---
 
-</div>
-✨ Why JobFlow?
+## 🛠️ Tech Stack
 
-Job hunting becomes messy very quickly.
+### Frontend
 
-Applications get scattered across spreadsheets, browser tabs, emails, notes and bookmarks.
+* React.js
+* JavaScript
+* HTML
+* CSS
+* npm
 
-JobFlow brings everything into one place.
+### Backend
 
-Instead of asking:
+* Python
+* FastAPI
+* Uvicorn
+* JWT Authentication
 
-"Where did I apply?"
+### Database
 
-JobFlow helps answer:
+* PostgreSQL
+* Neon
 
-What did I apply for? What is the current status? What's next?
+### Deployment
 
-🎯 Core Features
-<table> <tr> <td width="50%">
-🔐 Authentication
-Secure user registration
-Login system
-JWT-based authentication
-Protected API routes
-Persistent login sessions
-</td> <td width="50%">
-💼 Job Tracking
-Add job applications
-View applications
-Update application details
-Delete applications
-Track application status
-</td> </tr> <tr> <td>
-📄 Resume Intelligence
-Resume upload support
-ATS scoring endpoint
-Resume analysis workflow
-Backend-powered processing
-</td> <td>
-📊 Career Dashboard
-Centralized application management
-Search applications
-Track progress
-User-specific data
-</td> </tr> <tr> <td>
-⚡ REST API
-FastAPI backend
-RESTful endpoints
-Automatic Swagger documentation
-Request validation with Pydantic
-</td> <td>
-☁️ Production Deployment
-React frontend deployed on Vercel
-FastAPI backend deployed on Render
-PostgreSQL database
-Production CORS configuration
-Environment-based configuration
-</td> </tr> </table>
-🧠 Architecture
-                         ┌─────────────────────┐
-                         │       USER          │
-                         │     Browser         │
-                         └──────────┬──────────┘
-                                    │
-                                    ▼
-                         ┌─────────────────────┐
-                         │      JobFlow        │
-                         │   React Frontend    │
-                         │      Vite           │
-                         └──────────┬──────────┘
-                                    │
-                              REST API / JSON
-                                    │
-                                    ▼
-                         ┌─────────────────────┐
-                         │      FastAPI        │
-                         │      Backend        │
-                         ├─────────────────────┤
-                         │ Authentication      │
-                         │ Job Management      │
-                         │ Resume Processing   │
-                         │ CORS                │
-                         └──────────┬──────────┘
-                                    │
-                                    ▼
-                         ┌─────────────────────┐
-                         │     PostgreSQL      │
-                         │      Database       │
-                         └─────────────────────┘
-🛠️ Tech Stack
-Frontend
-Technology	Purpose
-⚛️ React	User interface
-⚡ Vite	Development & build tooling
-🎨 CSS	UI styling
-🌐 Fetch API	Backend communication
-🔐 Local Storage	Token persistence
-Backend
-Technology	Purpose
-🐍 Python	Backend language
-⚡ FastAPI	REST API framework
-🧩 Pydantic	Data validation
-🔑 JWT	Authentication
-🗄️ SQLAlchemy	Database ORM
-📄 python-docx	Resume processing
-Database
-PostgreSQL
-Deployment
-Frontend  → Vercel
-Backend   → Render
-Database  → PostgreSQL
-Source    → GitHub
-🔥 Application Flow
-User
- │
- ├── Register
- │      ↓
- │   Backend validates user
- │      ↓
- │   Password securely processed
- │      ↓
- │   User stored in PostgreSQL
- │
- ├── Login
- │      ↓
- │   JWT token generated
- │      ↓
- │   Token stored by frontend
- │
- └── Dashboard
-        │
-        ├── Create Job
-        ├── View Jobs
-        ├── Update Job
-        ├── Delete Job
-        └── Analyze Resume
-🔐 Authentication Flow
+* Render — Backend
+* Vercel — Frontend
 
-JobFlow uses JWT-based authentication.
+### Development Tools
 
-             LOGIN
-               │
-               ▼
-        ┌──────────────┐
-        │   FastAPI    │
-        └──────┬───────┘
-               │
-        Validate credentials
-               │
-               ▼
-        ┌──────────────┐
-        │ JWT Generated│
-        └──────┬───────┘
-               │
-               ▼
-        React stores token
-               │
-               ▼
-       Protected API calls
+* Git
+* GitHub
+* VS Code
 
-Protected requests use:
+---
 
-Authorization: Bearer <token>
-📡 API Endpoints
-Authentication
-Method	Endpoint	Description
-POST	/auth/register	Register a new user
-POST	/auth/login	Authenticate user
-GET	/auth/me	Get current user
-Jobs
-Method	Endpoint	Description
-GET	/jobs	Get user's jobs
-POST	/jobs	Create a job
-GET	/jobs/{job_id}	Get a specific job
-PUT	/jobs/{job_id}	Update a job
-DELETE	/jobs/{job_id}	Delete a job
-Resume
-Method	Endpoint	Description
-POST	/resume/ats-score	Calculate ATS score
-📂 Project Structure
+## 🏗️ Project Architecture
+
+```text
+                    ┌─────────────────────┐
+                    │      React UI       │
+                    │      Frontend       │
+                    └──────────┬──────────┘
+                               │
+                               │ REST API
+                               ▼
+                    ┌─────────────────────┐
+                    │      FastAPI        │
+                    │       Backend       │
+                    └──────────┬──────────┘
+                               │
+                    ┌──────────┴──────────┐
+                    │                     │
+                    ▼                     ▼
+             ┌─────────────┐      ┌─────────────┐
+             │ JWT Auth    │      │ PostgreSQL  │
+             │             │      │   Database  │
+             └─────────────┘      └──────┬──────┘
+                                         │
+                                         ▼
+                                  ┌─────────────┐
+                                  │    Neon     │
+                                  │ PostgreSQL  │
+                                  └─────────────┘
+```
+
+---
+
+## 📂 Project Structure
+
+```text
 jobFlow/
 │
 ├── backend/
-│   │
 │   ├── src/
-│   │   ├── database/
-│   │   │   ├── connection.py
-│   │   │   └── models.py
-│   │   │
-│   │   ├── routers/
-│   │   │   ├── auth.py
-│   │   │   ├── jobs.py
-│   │   │   └── resume.py
-│   │   │
-│   │   ├── schemas/
-│   │   │   ├── auth.py
-│   │   │   └── job.py
-│   │   │
-│   │   ├── auth.py
 │   │   └── main.py
 │   │
-│   ├── requirements.txt
-│   └── ...
+│   └── requirements.txt
 │
 ├── frontend/
-│   │
 │   ├── src/
-│   │   ├── assets/
-│   │   ├── App.jsx
-│   │   ├── App.css
-│   │   ├── index.css
-│   │   └── main.jsx
-│   │
-│   ├── public/
-│   ├── package.json
-│   ├── vite.config.js
-│   └── ...
+│   └── package.json
 │
 ├── .gitignore
 ├── LICENSE
 └── README.md
-⚙️ Run Locally
-1️⃣ Clone the repository
-git clone YOUR_GITHUB_REPOSITORY
+```
+
+---
+
+## ⚙️ Getting Started
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/CodeWithSudhanshu/jobFlow.git
 cd jobFlow
-2️⃣ Backend Setup
+```
+
+---
+
+# 🔧 Backend Setup
+
+Navigate to the backend:
+
+```bash
 cd backend
+```
 
 Create a virtual environment:
 
+```bash
 python -m venv venv
+```
 
 Activate it on Windows:
 
+```bash
 venv\Scripts\activate
+```
 
 Install dependencies:
 
+```bash
 pip install -r requirements.txt
-3️⃣ Configure Environment Variables
+```
 
-Create:
+### Environment Variables
 
-.env
+Create a `.env` file inside the backend directory:
 
-Example:
-
-DATABASE_URL=your_database_url
+```env
+DATABASE_URL=your_postgresql_database_url
 JWT_SECRET_KEY=your_secret_key
+```
 
-⚠️ Never commit .env to GitHub.
+Run the FastAPI server:
 
-4️⃣ Start Backend
-
-From the backend directory:
-
+```bash
 uvicorn src.main:app --reload
+```
 
-Backend will run locally on:
+The backend will be available at:
 
-http://localhost:8000
+```text
+http://127.0.0.1:8000
+```
 
-Swagger documentation:
+FastAPI automatically provides interactive API documentation at:
 
-http://localhost:8000/docs
-💻 Frontend Setup
+```text
+http://127.0.0.1:8000/docs
+```
+
+---
+
+# 🎨 Frontend Setup
 
 Open another terminal:
 
+```bash
 cd frontend
+```
 
 Install dependencies:
 
+```bash
 npm install
+```
 
-Create:
+Start the development server:
 
-.env
-
-Add:
-
-VITE_API_URL=YOUR_BACKEND_URL
-
-Start development server:
-
+```bash
 npm run dev
-🌍 Deployment
+```
 
-JobFlow uses a simple production architecture:
+The frontend will then be available through the URL shown by the development server.
 
-                 GitHub
-                    │
-          ┌─────────┴─────────┐
-          ▼                   ▼
-       Vercel              Render
-          │                   │
-          ▼                   ▼
-       React              FastAPI
-                              │
-                              ▼
-                         PostgreSQL
-Frontend
+---
 
-Deployed using Vercel.
+## 🔑 Authentication Flow
 
-Backend
+JobFlow uses **JWT-based authentication**.
 
-Deployed using Render.
+```text
+User
+  │
+  ▼
+Login / Register
+  │
+  ▼
+FastAPI Authentication API
+  │
+  ▼
+Validate Credentials
+  │
+  ▼
+Generate JWT Token
+  │
+  ▼
+React Stores Token
+  │
+  ▼
+Authenticated API Requests
+```
 
-Database
+Protected requests include the JWT token so the backend can identify and authorize the user.
 
-Production data is stored using PostgreSQL.
+---
 
-Environment Configuration
+## 🔄 Application Flow
 
-Frontend:
+```text
+        ┌──────────────┐
+        │     User     │
+        └──────┬───────┘
+               │
+               ▼
+       ┌───────────────┐
+       │ React Frontend│
+       └───────┬───────┘
+               │
+               ▼
+        ┌─────────────┐
+        │  FastAPI    │
+        │     API     │
+        └──────┬──────┘
+               │
+       ┌───────┴────────┐
+       │                │
+       ▼                ▼
+   JWT Auth        PostgreSQL
+                       │
+                       ▼
+                     Neon
+```
 
-VITE_API_URL
+---
 
-Backend:
+## 🌐 Deployment
 
-DATABASE_URL
-JWT_SECRET_KEY
-🛡️ Security
+### Backend — Render
 
-JobFlow follows several basic production security practices:
+The backend is configured for deployment on Render.
 
-🔐 JWT authentication
-🔑 Secret keys stored through environment variables
-🚫 .env excluded from Git
-🌐 Production CORS configuration
-👤 User-specific job data
-🧹 Environment-specific configuration
+**Runtime**
 
-Never expose your database credentials or JWT secret in source control.
+```text
+Python 3
+```
 
-🧪 API Documentation
+**Root Directory**
 
-The FastAPI backend automatically generates interactive Swagger documentation.
+```text
+backend
+```
 
-You can use it to:
+**Build Command**
 
-inspect endpoints
-test API requests
-inspect request schemas
-inspect response structures
-test authentication
-test CRUD operations
+```bash
+pip install -r requirements.txt
+```
 
-👉 Open API Documentation
+**Start Command**
 
-📸 Screenshots
+```bash
+uvicorn src.main:app --host 0.0.0.0 --port $PORT
+```
 
-Add screenshots here after taking them from the deployed application.
+Required environment variables:
 
-🔐 Authentication
-[ Add Login Screenshot Here ]
-📊 Dashboard
-[ Add Dashboard Screenshot Here ]
-💼 Job Tracking
-[ Add Job Management Screenshot Here ]
-📄 Resume ATS
-[ Add Resume ATS Screenshot Here ]
-🚀 What Makes JobFlow Different?
+```env
+DATABASE_URL=...
+JWT_SECRET_KEY=...
+PYTHON_VERSION=3.11.11
+```
 
-JobFlow isn't just another CRUD application.
+### Frontend — Vercel
 
-The project combines:
+The React frontend can be deployed separately using Vercel and configured to communicate with the deployed FastAPI backend.
 
-Frontend Engineering
-        +
-REST API Development
-        +
-Authentication
-        +
-Database Design
-        +
-Resume Intelligence
-        +
-Cloud Deployment
+---
 
-The goal is to build a real-world workflow, rather than just demonstrate individual technologies.
+## 🧪 API Documentation
 
-🗺️ Roadmap
-✅ Completed
- User registration
- User login
- JWT authentication
- Job CRUD
- PostgreSQL integration
- Resume ATS endpoint
- React frontend
- FastAPI backend
- Production CORS
- Vercel deployment
- Render deployment
-🔮 Future Improvements
- Application analytics
- Interview tracking
- Interview reminders
- Email notifications
- Calendar integration
- Resume version management
- AI-powered job description analysis
- AI resume improvement suggestions
- Job recommendation engine
- Application statistics dashboard
- Dark/light theme customization
-📈 Future Vision
+Once the backend is running, FastAPI provides interactive API documentation.
 
-The long-term goal of JobFlow is to evolve from a simple application tracker into a personal career operating system.
+### Swagger UI
 
-             JOBFLOW
-                │
-      ┌─────────┼─────────┐
-      │         │         │
-      ▼         ▼         ▼
- Applications  Resume   Interviews
-      │         │         │
-      └─────────┼─────────┘
-                │
-                ▼
-           Career Analytics
-                │
-                ▼
-          AI Career Assistant
-👨‍💻 Built By
-<div align="center">
-Sudhanshu Sharma
+```text
+/docs
+```
 
-B.Tech — Artificial Intelligence & Data Science
+### ReDoc
 
-Building projects around:
+```text
+/redoc
+```
 
-Python • Backend Development • AI/ML • APIs • Full-Stack Development
+These interfaces make it easy to test and understand the available API endpoints.
 
-<br>
+---
 
-</div>
-⭐ Support
+## 🔮 Future Improvements
 
-If you found this project interesting:
+* 📌 Advanced job search and filtering
+* 📊 Application analytics dashboard
+* 📅 Interview scheduling
+* 🔔 Application deadline reminders
+* 📝 Resume management
+* 📄 Job description analysis
+* 🤖 AI-powered job recommendations
+* 📈 Application statistics
+* 🌐 Production deployment
+* 📱 Responsive mobile experience
 
-⭐ Star the repository
+---
 
-🍴 Fork it
+## 🎯 Why JobFlow?
 
-💡 Suggest improvements
+Job searching often involves managing multiple applications across different companies and platforms.
 
-🐛 Report issues
+JobFlow aims to provide a **centralized workspace** where users can organize their opportunities and application progress instead of maintaining scattered notes or spreadsheets.
 
-Every bit of feedback helps improve JobFlow.
+---
 
-<div align="center">
-🚀 JobFlow
+## 👨‍💻 Author
 
-Your applications. Your progress. Your career.
+**Sudhanshu Sharma**
 
-<br>
+GitHub: [CodeWithSudhanshu](https://github.com/CodeWithSudhanshu)
 
-Built with React + FastAPI + PostgreSQL
+---
 
-</div>
-🔥 One thing I'd change from this version
+## 📄 License
 
-For your actual GitHub, I would make the README even more impressive by putting a real screenshot/GIF of JobFlow at the very top, directly underneath the title.
+This project is licensed under the **MIT License**.
 
-Something like:
+See the `LICENSE` file for more information.
 
-┌──────────────────────────────────────────────────────────┐
-│                                                          │
-│                       JOBFLOW                            │
-│                                                          │
-│          Career Command Center                           │
-│                                                          │
-│              [ ACTUAL APP SCREENSHOT ]                   │
-│                                                          │
-└──────────────────────────────────────────────────────────┘
+---
 
-That immediately tells a recruiter "this is a real deployed product", instead of making them read 100 lines first.
-
-Your live links are:
-
-JobFlow — Live Frontend
-JobFlow — Backend
-JobFlow — Swagger API Docs
-JobFlow — GitHub Repository
+⭐ If you find this project useful, consider giving the repository a star!
