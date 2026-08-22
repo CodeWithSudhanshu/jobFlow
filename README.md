@@ -1,4 +1,4 @@
-<div align="center">
+<img width="1918" height="897" alt="image" src="https://github.com/user-attachments/assets/d3eda65d-df8e-474f-9026-35030f1dcda2" /><div align="center">
 
 # 🚀 JobFlow
 ### Your Career Command Center
@@ -34,7 +34,7 @@ Job hunting gets chaotic fast — applications scattered across spreadsheets, em
 ## 📸 Screenshot
 
 <p align="center">
-  <img src="updated_ui.png" width="850" alt="JobFlow Dashboard"/>
+  <img src="final_ui.png" width="850" alt="JobFlow Dashboard"/>
 </p>
 
 
