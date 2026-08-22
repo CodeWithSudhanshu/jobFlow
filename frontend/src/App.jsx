@@ -15,8 +15,14 @@ function App() {
   const [authEmail, setAuthEmail] = useState("");
   const [authPassword, setAuthPassword] = useState("");
   const [authError, setAuthError] = useState("");
+  // Success-style feedback (e.g. "Account created successfully. Please log in.")
+  // kept separate from authError so it can be styled green instead of red.
+  const [authNotice, setAuthNotice] = useState("");
   const [authSubmitting, setAuthSubmitting] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
+  // Toggles the password field between masked ("password") and
+  // plain-text ("text") so the user can show/hide what they typed.
+  const [showPassword, setShowPassword] = useState(false);
 
   const [currentTime, setCurrentTime] = useState(new Date());
   const [applications, setApplications] = useState([]);
@@ -440,6 +446,16 @@ function App() {
     return `${year}-${month}-${day}`;
   };
 
+  // Returns a time-of-day-appropriate greeting based on the given Date.
+  // Driven by currentTime (which ticks every second), so the dashboard
+  // greeting updates automatically without a page refresh.
+  const getGreeting = (date) => {
+    const hour = date.getHours();
+    if (hour < 12) return "Good morning";
+    if (hour < 17) return "Good afternoon";
+    return "Good evening";
+  };
+
   useEffect(() => {
     try {
       localStorage.setItem("jobflow_reminders", JSON.stringify(reminders));
@@ -588,6 +604,7 @@ function App() {
   const handleAuthSubmit = async (e) => {
     e.preventDefault();
     setAuthError("");
+    setAuthNotice("");
     setAuthSubmitting(true);
 
     try {
@@ -632,7 +649,9 @@ function App() {
       if (!token) {
         if (authMode === "register") {
           setAuthMode("login");
-          setAuthError("Account created successfully. Please log in.");
+          // Successful account creation — shown in green, not the red error box.
+          setAuthNotice("Account registered successfully. Please log in.");
+          setAuthError("");
           setAuthPassword("");
           return;
         }
@@ -663,8 +682,10 @@ function App() {
       setAuthPassword("");
       setAuthName("");
       setAuthError("");
+      setAuthNotice("");
     } catch (err) {
       console.error("Authentication error:", err);
+      setAuthNotice("");
       setAuthError(err.message || "Something went wrong.");
     } finally {
       setAuthSubmitting(false);
@@ -772,6 +793,7 @@ function App() {
                 onClick={() => {
                   setAuthMode(mode);
                   setAuthError("");
+                  setAuthNotice("");
                 }}
                 style={{
                   flex: 1,
@@ -819,16 +841,91 @@ function App() {
 
             <label style={{ display: "flex", flexDirection: "column", gap: "7px", marginBottom: "18px" }}>
               <span style={{ color: "#aaa5b8", fontSize: "12px" }}>Password</span>
-              <input
-                type="password"
-                value={authPassword}
-                onChange={(e) => setAuthPassword(e.target.value)}
-                placeholder="••••••••"
-                minLength={6}
-                required
-                style={modalInputStyle}
-              />
+              <div style={{ position: "relative" }}>
+                <input
+                  type={showPassword ? "text" : "password"}
+                  value={authPassword}
+                  onChange={(e) => setAuthPassword(e.target.value)}
+                  placeholder="••••••••"
+                  minLength={6}
+                  required
+                  style={{ ...modalInputStyle, paddingRight: "44px" }}
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword((prev) => !prev)}
+                  aria-label={showPassword ? "Hide password" : "Show password"}
+                  aria-pressed={showPassword}
+                  style={{
+                    position: "absolute",
+                    top: "50%",
+                    right: "10px",
+                    transform: "translateY(-50%)",
+                    width: "28px",
+                    height: "28px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    border: "none",
+                    background: "transparent",
+                    color: "#aaa5b8",
+                    cursor: "pointer",
+                    padding: 0,
+                  }}
+                >
+                  {showPassword ? (
+                    // Eye-off icon (password currently visible; click to hide)
+                    <svg
+                      viewBox="0 0 24 24"
+                      width="18"
+                      height="18"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.8"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M17.94 17.94A10.94 10.94 0 0 1 12 20c-6 0-10-6-10-8a13.16 13.16 0 0 1 3.06-4.94" />
+                      <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c6 0 10 6 10 8a13.28 13.28 0 0 1-1.67 2.68" />
+                      <path d="M14.12 14.12a3 3 0 1 1-4.24-4.24" />
+                      <path d="M1 1l22 22" />
+                    </svg>
+                  ) : (
+                    // Eye icon (password currently hidden; click to show)
+                    <svg
+                      viewBox="0 0 24 24"
+                      width="18"
+                      height="18"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.8"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                      <circle cx="12" cy="12" r="3" />
+                    </svg>
+                  )}
+                </button>
+              </div>
             </label>
+
+            {authNotice && (
+              <div
+                style={{
+                  marginBottom: "15px",
+                  padding: "11px 12px",
+                  borderRadius: "9px",
+                  background: "rgba(34,197,94,.08)",
+                  border: "1px solid rgba(34,197,94,.25)",
+                  color: "#4ade80",
+                  fontSize: "12px",
+                  lineHeight: 1.4,
+                }}
+              >
+                {authNotice}
+              </div>
+            )}
 
             {authError && (
               <div
@@ -1810,7 +1907,7 @@ function App() {
                 YOUR CAREER DASHBOARD
               </div>
               <h1>
-                Good evening,{" "}
+                {getGreeting(currentTime)},{" "}
                 <span>
                   {currentUser?.name || "User"}.
                 </span>
