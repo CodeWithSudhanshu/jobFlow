@@ -34,11 +34,9 @@ Job hunting gets chaotic fast — applications scattered across spreadsheets, em
 ## 📸 Screenshot
 
 <p align="center">
-  <img src="./assets/dashboard-preview.png" width="850" alt="JobFlow Dashboard"/>
+  <img src="website.ui.png" width="850" alt="JobFlow Dashboard"/>
 </p>
 
-<!-- Replace the image above with an actual screenshot of your dashboard.
-     Save it to ./assets/dashboard-preview.png in the repo. -->
 
 ---
 
